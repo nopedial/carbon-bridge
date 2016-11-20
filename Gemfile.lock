@@ -1,0 +1,18 @@
+PATH
+  remote: .
+  specs:
+    carbon-bridge (0.0.0)
+      asetus (~> 0.3, >= 0.3.0)
+      logger (~> 1.2, >= 1.2.8)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    asetus (0.3.0)
+    logger (1.2.8)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  carbon-bridge!

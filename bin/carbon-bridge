@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'carbon-bridge'
+
+begin
+  cb	 	= CarbonBridge::Core.new
+  cb.run
+end
