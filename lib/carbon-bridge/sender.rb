@@ -1,34 +1,34 @@
 module CarbonBridge
   class Sender
 
-    def initialize carbon_host, carbon_port, carbon_proto='udp', metrics, debug
-      @carbon_host 	= carbon_host
-      @carbon_port 	= carbon_port
-      @carbon_proto	= carbon_proto
+    def initialize metrics
       @metrics		= metrics
-      @debug		= debug
       @hostname		= `hostname`.chop.split('.').join('-')
-      _send
+      threads 		= []
+      Cfg.carbon.server_ip.each do |cho|
+        threads << Thread.new {
+          _send(cho)
+        }
+      end
+      threads.each(&:join)
     end
 
-    def _send
+    def _send carbon_host
       begin
-        case @carbon_proto
+        case Cfg.carbon.tx_protocol
         when 'udp'
           @tx_sock = UDPSocket.new
           @metrics.each do |metric|
-            @tx_sock.send [ [ @hostname, metric[1] ].join('.'), metric[2], metric[0] ].join(' '), 0, @carbon_host, @carbon_port
+            @tx_sock.send [ [ @hostname, metric[1] ].join('.'), metric[2], metric[0] ].join(' '), 0, carbon_host, Cfg.carbon.server_port
+            Log.debug [ 'metric sent to carbon-cache - ', [ [ @hostname, metric[1] ].join('.'), metric[2], metric[0] ].join(' '), ' -> ', [ carbon_host, Cfg.carbon.server_port ].join(':') ].join if Cfg.debug
           end
         when 'tcp'
-          r = Random.new
-          @tx_sock = TCPSocket.new @carbon_host, @carbon_port
+          @tx_sock = TCPSocket.new carbon_host, Cfg.carbon.server_port
           @metrics.each do |metric|
-            # inbound metric = timestamp, metric_name, value => outbound metric: hostname.metric.name value timestamp
             @tx_sock.write [ [ @hostname, metric[1] ].join('.'), metric[2], metric[0] ].join(' ')
+            Log.debug [ 'metric sent to carbon-cache - ', [ [ @hostname, metric[1] ].join('.'), metric[2], metric[0] ].join(' '), ' -> ', [ carbon_host, Cfg.carbon.server_port ].join(':') ].join if Cfg.debug
           end
         end
-        Log.debug [ 'metric sent to carbon-cache server', [ @carbon_host, @carbon_proto, @carbon_port ].join(':') ].join(' ') if @debug
-        @tx_sock.close
       rescue => e
         Log.error e
         exit 0

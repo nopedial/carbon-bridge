@@ -1,19 +1,16 @@
 module CarbonBridge
   class Metrics
 
-    def initialize plugin_dirs, log, debug
-      @plugin_dirs 	= plugin_dirs
-      @log 		= log
-      @debug 		= debug
+    def initialize
     end
 
     def collect
       begin
         metrics = []
-        Dir.entries(@plugin_dirs).each do |plugin|
+        Dir.entries(Cfg.collect.plugins).each do |plugin|
           next if plugin == '.' or plugin == '..'
-          @log.debug [ 'running script ', plugin ].join if @debug
-          metric = `#{File.join(@plugin_dirs, plugin)}`
+          Log.debug [ 'running script ', plugin ].join if Cfg.debug
+          metric = `#{File.join(Cfg.collect.plugins, plugin)}`
           metrics << [ Time.now.to_i, metric.split(' ')[0], metric.split(' ')[1] ] # timestamp, metric name, value
         end
         return metrics

@@ -3,6 +3,7 @@ module CarbonBridge
   require 'asetus'
   require 'logger'
   require 'socket'
+  require 'thread'
   require 'carbon-bridge/core'
   require 'carbon-bridge/metrics'
   require 'carbon-bridge/sender'

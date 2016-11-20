@@ -1,14 +1,14 @@
 module CarbonBridge
 
   if File.exists? '/etc/carbon-bridge/config'
-    Cfg  			= Asetus.cfg name: 'carbon-bridge'
+    Cfg  				= Asetus.cfg name: 'carbon-bridge'
   else
     CFG = Asetus.new :name=>'carbon-bridge', :load=>false
     CFG.default.debug 			= true
     CFG.default.logging			= 'STDOUT'
     CFG.default.collect.looptime 	= 300
     CFG.default.collect.plugins		= '~/.config/carbon-bridge/plugins'
-    CFG.default.carbon.server_ip	= '127.0.0.1'
+    CFG.default.carbon.server_ip	= [ '127.0.0.1' ]
     CFG.default.carbon.server_port	= 2003
     CFG.default.carbon.tx_protocol	= 'udp'
     CFG.load
@@ -21,6 +21,7 @@ module CarbonBridge
       if Cfg.logging == 'STDOUT'
         target = STDOUT
       else
+        Process.daemon
         target = Cfg.logging
       end
       Log = Logger.new target
@@ -34,12 +35,10 @@ module CarbonBridge
 
     def run
       while true do
-        Log.debug 'collecting metrics ..' if Cfg.debug
-        collector 	= Metrics.new(Cfg.collect.plugins, Log, Cfg.debug)
+        collector 	= Metrics.new
         metrics 	= collector.collect
         if metrics.count > 0
-          Log.debug 'sending metrics ..' if Cfg.debug
-          sender  	= Sender.new(Cfg.carbon.server_ip, Cfg.carbon.server_port, Cfg.carbon.tx_protocol, metrics, Cfg.debug)
+          sender  	= Sender.new(metrics)
         else
           Log.debug 'no metrics collected ..' if Cfg.debug
         end
