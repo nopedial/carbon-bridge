@@ -13,7 +13,7 @@ module CarbonBridge
           metric = `#{File.join(Cfg.collect.plugins, plugin)}`
           if metric[-1] == "\n"
             Log.debug 'removing trailing characters ..' if Cfg.debug
-            metric = metric[0..-2]
+            metric = metric.chop
           end
           metrics << [ Time.now.to_i, metric.split(' ')[0], metric.split(' ')[1] ] # timestamp, metric name, value
         end
