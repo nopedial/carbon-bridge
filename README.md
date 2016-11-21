@@ -1,11 +1,14 @@
-#### carbon-bridge
+### carbon-bridge
 
-##### sample configuation:
+carbon-bridge is a light-weight ruby daemon that collects metrics from used-defined scripts and sends them to a set of carbon-cache servers
+
+##### configuration
 
 ```
 ---
 debug: true
 logging: STDOUT
+pidfile: '/home/shafez/.config/carbon-bridge/pid.txt'
 collect:
   looptime: 3
   plugins: '/home/shafez/.config/carbon-bridge/plugins'
@@ -18,3 +21,20 @@ carbon:
   tx_protocol: udp
 ```
 
+#### add a script
+
+1. create a new script (language does NOT matter)
+2. make the script executable
+3. move the script to the 'plugins' directory (e.g.: /home/shafez/.config/carbon-bridge/plugins)
+
+#### script output
+
+scripts must return 'metric name / metric value' pairs as in the example below:
+
+```
+shafez@ms:~$ ./.config/carbon-bridge/plugins/example.rb 
+system-metrics.uptime 77
+shafez@ms:~$
+```
+
+##### NOTE - carbon-bridge automatically adds timestamps before sending the metrics to the carbon-cache server
