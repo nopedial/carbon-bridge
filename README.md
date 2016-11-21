@@ -2,6 +2,37 @@
 
 carbon-bridge is a light-weight ruby daemon that periodically collects metrics from user-defined scripts and sends them to a set of carbon servers
 
+### install
+
+```
+shafez@ns:~$ git clone https://github.com/nopedial/carbon-bridge
+Cloning into 'carbon-bridge'...
+remote: Counting objects: 92, done.
+remote: Compressing objects: 100% (68/68), done.
+remote: Total 92 (delta 36), reused 76 (delta 20), pack-reused 0
+Unpacking objects: 100% (92/92), done.
+Checking connectivity... done.
+shafez@ns:~$ cd carbon-bridge/
+shafez@ns:~/carbon-bridge$ bundle install
+Resolving dependencies...
+Using asetus 0.3.0
+Using logger 1.2.8
+
+[ ... ]
+Your bundle is complete!
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+shafez@ns:~/carbon-bridge$ rake install
+  Successfully built RubyGem
+  Name: carbon-bridge
+  Version: 0.0.2
+  File: carbon-bridge-0.0.2.gem
+Successfully installed carbon-bridge-0.0.2
+1 gem installed
+shafez@ns:~/carbon-bridge$ cd
+shafez@ns:~$ carbon-bridge
++ base configuration built at: ~/.config/carbon-bridge/config
+shafez@ns:~$
+
 ### configuration
 
 ```
