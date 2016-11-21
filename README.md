@@ -1,6 +1,6 @@
 ### carbon-bridge
 
-carbon-bridge is a light-weight ruby daemon that periodically collects metrics from user-defined scripts and sends them to a set of carbon-cache servers
+carbon-bridge is a light-weight ruby daemon that periodically collects metrics from user-defined scripts and sends them to a set of carbon servers
 
 ### configuration
 
@@ -37,4 +37,4 @@ system-metrics.uptime 77
 shafez@ms:~$
 ```
 
-#### NOTE - carbon-bridge automatically adds timestamps before sending the metrics to the carbon-cache server
+#### NOTE - carbon-bridge automatically adds timestamps before sending the metrics to the carbon server
