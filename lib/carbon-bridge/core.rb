@@ -6,6 +6,7 @@ module CarbonBridge
     CFG = Asetus.new :name=>'carbon-bridge', :load=>false
     CFG.default.debug 			= true
     CFG.default.logging			= 'STDOUT'
+    CFG.default.pidfile			= '~/.config/carbon-bridge/pid.txt'
     CFG.default.collect.looptime 	= 300
     CFG.default.collect.plugins		= '~/.config/carbon-bridge/plugins'
     CFG.default.carbon.server_ip	= [ '127.0.0.1' ]
@@ -31,6 +32,9 @@ module CarbonBridge
   class Core
 
     def initialize
+      File.open(Cfg.pidfile, 'w') do |wr|
+        wr.puts $$
+      end
     end
 
     def run
