@@ -10,7 +10,7 @@ debug: true
 logging: STDOUT
 pidfile: '/home/shafez/.config/carbon-bridge/pid.txt'
 collect:
-  looptime: 3
+  looptime: 300
   plugins: '/home/shafez/.config/carbon-bridge/plugins'
 carbon:
   server_ip: 
