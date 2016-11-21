@@ -39,7 +39,7 @@ shafez@ns:~$
 ```
 ---
 debug: true
-logging: STDOUT
+logging: 'STDOUT'
 pidfile: '/home/shafez/.config/carbon-bridge/pid.txt'
 collect:
   looptime: 300
@@ -52,6 +52,8 @@ carbon:
   server_port: 2003
   tx_protocol: udp
 ```
+
+#### NOTE - to run the daemon in background set 'logging' to something different than 'STDOUT'
 
 ### add a script
 
