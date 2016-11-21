@@ -2,7 +2,7 @@
 
 carbon-bridge is a light-weight ruby daemon that collects metrics from used-defined scripts and sends them to a set of carbon-cache servers
 
-##### configuration
+### configuration
 
 ```
 ---
@@ -21,7 +21,7 @@ carbon:
   tx_protocol: udp
 ```
 
-#### add a script
+### add a script
 
 1. create a new script (language does NOT matter)
 2. make the script executable
@@ -37,4 +37,4 @@ system-metrics.uptime 77
 shafez@ms:~$
 ```
 
-##### NOTE - carbon-bridge automatically adds timestamps before sending the metrics to the carbon-cache server
+#### NOTE - carbon-bridge automatically adds timestamps before sending the metrics to the carbon-cache server
