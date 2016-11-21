@@ -1,6 +1,6 @@
 ### carbon-bridge
 
-carbon-bridge is a light-weight ruby daemon that collects metrics from user-defined scripts and sends them to a set of carbon-cache servers
+carbon-bridge is a light-weight ruby daemon that periodically collects metrics from user-defined scripts and sends them to a set of carbon-cache servers
 
 ### configuration
 
@@ -24,7 +24,7 @@ carbon:
 ### add a script
 
 1. create a new script (language does NOT matter)
-2. make the script executable
+2. make sure the script is executable
 3. move the script to the 'plugins' directory (e.g.: /home/shafez/.config/carbon-bridge/plugins)
 
 #### script output
