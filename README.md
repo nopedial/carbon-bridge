@@ -32,6 +32,7 @@ shafez@ns:~/carbon-bridge$ cd
 shafez@ns:~$ carbon-bridge
 + base configuration built at: ~/.config/carbon-bridge/config
 shafez@ns:~$
+```
 
 ### configuration
 
@@ -63,9 +64,9 @@ carbon:
 scripts must return 'metric name / metric value' pairs as in the example below:
 
 ```
-shafez@ms:~$ ./.config/carbon-bridge/plugins/example.rb 
+shafez@ns:~$ ./.config/carbon-bridge/plugins/example.rb 
 system-metrics.uptime 77
-shafez@ms:~$
+shafez@ns:~$
 ```
 
 #### NOTE - carbon-bridge automatically adds timestamps before sending the metrics to the carbon server
