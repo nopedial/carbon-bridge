@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name              = 'carbon-bridge'
-  s.version           = '0.0.2'
+  s.version           = '0.0.3'
   s.platform          = Gem::Platform::RUBY
   s.authors           = [ 'Samer Abdel-Hafez' ]
   s.email             = %w( sam@arahant.net )
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.files             = `git ls-files`.split("\n")
   s.executables       = %w( carbon-bridge )
   s.require_path      = 'lib'
- 
+
   s.add_dependency 'asetus', '~> 0.3', '>= 0.3.0'
   s.add_dependency 'logger', '~> 1.2', '>= 1.2.8'
 end

@@ -2,15 +2,22 @@ module CarbonBridge
   class Sender
 
     def initialize metrics
-      @metrics		= metrics
-      @hostname		= `hostname`.chop.split('.').join('-')
-      threads 		= []
+      @metrics		  = metrics
+      if not Cfg.localhostname
+        @hostname		  = `hostname`.chop.split('.').join('-')
+      else
+        @hostname     = Cfg.localhostname
+      end
+      threads 		  = []
       Cfg.carbon.server_ip.each do |cho|
+        @tot_metrics = 0
         threads << Thread.new {
           _send(cho)
+          @tot_metrics += 1
         }
       end
       threads.each(&:join)
+      return @tot_metrics
     end
 
     def _send carbon_host
@@ -29,7 +36,7 @@ module CarbonBridge
             Log.debug [ 'metric sent to carbon-cache - ', [ [ @hostname, metric[1] ].join('.'), metric[2], metric[0] ].join(' '), ' -> ', [ carbon_host, Cfg.carbon.server_port ].join(':') ].join if Cfg.debug
           end
         end
-        return @tx_sock
+        return
       rescue => e
         Log.error e
         exit 0
