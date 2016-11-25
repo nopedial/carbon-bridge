@@ -17,7 +17,6 @@ module CarbonBridge
         }
       end
       threads.each(&:join)
-      return @tot_metrics
     end
 
     def _send carbon_host

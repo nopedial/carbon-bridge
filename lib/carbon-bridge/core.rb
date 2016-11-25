@@ -39,13 +39,11 @@ module CarbonBridge
     end
 
     def run
-      metrics_sent = 0
       while true do
         collector 	       = Metrics.new
         metrics 	         = collector.collect
         if metrics.count > 0
-          metrics_count  	 = Sender.new(metrics)
-          metrics_sent     = metrics_sent + metrics_count
+          sender  	       = Sender.new(metrics)
         else
           Log.debug 'no metrics collected ..' if Cfg.debug
         end
