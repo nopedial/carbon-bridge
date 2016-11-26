@@ -18,7 +18,7 @@ module CarbonBridge
           metrics << [ Time.now.to_i, metric.split(' ')[0], metric.split(' ')[1] ] # timestamp, metric name, value
         end
         return metrics
-      rescue => e 
+      rescue => e
         Log.warn e
         return [ ]
       end

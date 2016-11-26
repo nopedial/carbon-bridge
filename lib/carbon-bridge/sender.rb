@@ -6,7 +6,7 @@ module CarbonBridge
       if not Cfg.localhostname
         @hostname		  = `hostname`.chop.split('.').join('-')
       else
-        @hostname     = Cfg.localhostname
+        @hostname     = Cfg.localhostname.split('.').join('-')
       end
       threads 		  = []
       Cfg.carbon.server_ip.each do |cho|

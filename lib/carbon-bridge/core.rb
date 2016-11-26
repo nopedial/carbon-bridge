@@ -39,6 +39,7 @@ module CarbonBridge
     end
 
     def run
+      Log.info 'running ..'
       while true do
         collector 	       = Metrics.new
         metrics 	         = collector.collect
