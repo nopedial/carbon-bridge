@@ -1,6 +1,6 @@
 ### carbon-bridge
 
-carbon-bridge is a light-weight ruby daemon that periodically collects metrics from user-defined scripts and sends them to a set of carbon servers
+carbon-bridge is a light-weight ruby daemon that periodically collects metrics from user-defined scripts and sends them to one or more carbon servers
 
 ### install
 
@@ -24,9 +24,9 @@ Use `bundle show [gemname]` to see where a bundled gem is installed.
 shafez@ns:~/carbon-bridge$ rake install
   Successfully built RubyGem
   Name: carbon-bridge
-  Version: 0.0.2
-  File: carbon-bridge-0.0.2.gem
-Successfully installed carbon-bridge-0.0.2
+  Version: 0.0.4
+  File: carbon-bridge-0.0.4.gem
+Successfully installed carbon-bridge-0.0.4
 1 gem installed
 shafez@ns:~/carbon-bridge$ cd
 shafez@ns:~$ carbon-bridge
@@ -41,6 +41,7 @@ shafez@ns:~$
 debug: true
 logging: 'STDOUT'
 pidfile: '/home/shafez/.config/carbon-bridge/pid.txt'
+localhostname: server.example.com
 collect:
   looptime: 300
   plugins: '/home/shafez/.config/carbon-bridge/plugins'
