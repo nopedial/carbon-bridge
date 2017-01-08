@@ -48,7 +48,7 @@ module CarbonBridge
         else
           Log.debug 'no metrics collected ..' if Cfg.debug
         end
-        Log.debug [ 'metrics sent to carbon server:', metrics_sent ].join(' ') if Cfg.debug
+        Log.debug [ 'metrics sent to carbon server:', metrics ].join(' ') if Cfg.debug
         sleep Cfg.collect.looptime
       end
     end
