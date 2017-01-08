@@ -72,4 +72,14 @@ system-metrics.uptime 77
 shafez@ns:~$
 ```
 
-#### NOTE - carbon-bridge automatically adds timestamps before sending the metrics to the carbon server
+#### timestamps
+
+timestamps (epoch) can be passed as an optional value from the user-defined scripts:
+
+```
+shafez@ns:~$ ./.config/carbon-bridge/plugins/example.rb
+system-metrics.uptime 77 1483399928
+shafez@ns:~$
+```
+
+carbon-bridge will add a local timestamp if unable to retrieve one from the scripts output
