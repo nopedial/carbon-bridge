@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    carbon-bridge (0.0.2)
+    carbon-bridge (0.0.6)
       asetus (~> 0.3, >= 0.3.0)
       logger (~> 1.2, >= 1.2.8)
 

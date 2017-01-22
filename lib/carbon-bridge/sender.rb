@@ -28,6 +28,7 @@ module CarbonBridge
             @tx_sock.send [ [ @hostname, metric[1] ].join('.'), metric[2], metric[0] ].join(' '), 0, carbon_host, Cfg.carbon.server_port
             Log.debug [ 'metric sent to carbon-cache - ', [ [ @hostname, metric[1] ].join('.'), metric[2], metric[0] ].join(' '), ' -> ', [ carbon_host, Cfg.carbon.server_port ].join(':') ].join if Cfg.debug
           end
+          @tx_sock.close
         when 'tcp'
           @tx_sock = TCPSocket.new carbon_host, Cfg.carbon.server_port
           @metrics.each do |metric|
